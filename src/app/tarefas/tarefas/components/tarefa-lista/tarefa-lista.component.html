@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+        Minhas Tarefas
+    </div>
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tarefa of tarefas">
+                    <td>
+                        {{ tarefa.nome}}
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fa fa-edit">Editar</i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
