@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TarefaListaComponent } from './tarefas/tarefas/components/tarefa-lista/tarefa-lista.component';
-import { TarefaCadastroComponent } from './tarefas/tarefas/components/tarefa-cadastro/tarefa-cadastro.component';
+import { TarefaListaComponent } from './tarefas/components/tarefa-lista/tarefa-lista.component';
+import { TarefaCadastroComponent } from './tarefas/components/tarefa-cadastro/tarefa-cadastro.component';
 
 const routes: Routes = [
   { path: '', component: TarefaListaComponent },
