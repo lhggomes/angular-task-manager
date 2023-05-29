@@ -16,7 +16,9 @@
                         {{ tarefa.nome}}
                     </td>
                     <td>
-                        <button class="btn btn-primary btn-sm">
+                        <button class="btn btn-primary btn-sm"
+                        [routerLink] = "['/tarefas', tarefa.id, 'editar']"
+                        >
                             <i class="fa fa-edit">Editar</i>
                         </button>
                     </td>

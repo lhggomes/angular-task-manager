@@ -3,6 +3,7 @@ import { Tarefa } from '../../models/tarefa';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TarefasService } from '../../services/tarefas.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tarefa-cadastro',
@@ -17,6 +18,7 @@ export class TarefaCadastroComponent implements OnInit, OnDestroy {
   tarefa!: Tarefa;
   tarefaForm!: FormGroup;
   validationMessages!: { [Key: string]: { [key: string]: string } }
+  private subscription!: Subscription;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -70,11 +72,11 @@ export class TarefaCadastroComponent implements OnInit, OnDestroy {
   }
 
   excuirTarefa(tarefa: Tarefa): void {
-    if (this.tarefa.id == ''){
+    if (this.tarefa.id == '') {
       this.onSaveComplete();
     }
     else {
-      if (confirm(`Tem certeza que deseja excluir a tarefa: ${this.tarefa.nome}?`)){
+      if (confirm(`Tem certeza que deseja excluir a tarefa: ${this.tarefa.nome}?`)) {
         this.tarefaService.excluirTarefa(this.tarefa.id!).subscribe(
           () => this.onSaveComplete(),
           (error: any) => this.errorMessage = <any>error
@@ -84,29 +86,29 @@ export class TarefaCadastroComponent implements OnInit, OnDestroy {
   }
 
   salvar(): void {
-    if (this.tarefaForm.valid){
-      if (this.tarefaForm.dirty){
+    if (this.tarefaForm.valid) {
+      if (this.tarefaForm.dirty) {
 
-        const t = {...this.tarefa, ...this.tarefaForm.value};
+        const t = { ...this.tarefa, ...this.tarefaForm.value };
 
-        if (t.id === ''){
+        if (t.id === '') {
           this.tarefaService.criarTarefa(t)
-          .subscribe(
-            () => this.onSaveComplete(),
-            (error: any) => this.errorMessage = <any>error
-          );
+            .subscribe(
+              () => this.onSaveComplete(),
+              (error: any) => this.errorMessage = <any>error
+            );
         } else {
           this.tarefaService.atualizarTarefa(t)
-          .subscribe(
-            () => this.onSaveComplete(),
-            (error: any) => this.errorMessage = <any>error
-          );
-        } 
+            .subscribe(
+              () => this.onSaveComplete(),
+              (error: any) => this.errorMessage = <any>error
+            );
+        }
 
-      }else {
+      } else {
         this.onSaveComplete();
       }
-    }else {
+    } else {
       this.errorMessage = "Por favor corriga os erros de validação. ";
     }
   }
@@ -125,6 +127,21 @@ export class TarefaCadastroComponent implements OnInit, OnDestroy {
       detalhes: ['', [Validators.minLength(3), Validators.maxLength(1000)]],
 
     })
+
+    this.subscription = this.route.paramMap.subscribe(
+      params => {
+        const id = params.get('id');
+        const nome = params.get('nome');
+
+        if (id == null || id == '') {
+          const tarefa: Tarefa = { id: "", nome: "", detalhes: "" };
+          this.exibirTarefa(tarefa);
+
+        } else {
+          this.obterTarefa(id);
+        }
+      }
+    )
   }
 
   ngOnDestroy(): void {

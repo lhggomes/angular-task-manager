@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-header">
-        Cadastro de Tarefa
+        {{ pageTitle}}
     </div>
     <div class="card-body">
 
-        <form>
+        <form novalidate (ngSubmit)=salvar() [formGroup]="tarefaForm">
             <div class="form-group row">
                 <label for="nome" class="col-md-2 col-form-label">Nome</label>
                 <div class="col-md-7">
@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label for="nome" class="col-md-2 col-form-label">Detalhes</label>
                 <div class="col-md-7">
-                    <textarea name="detalhes" id="detalhes" rows="3" placeholder="Informe os detalhes da tarefa"
+                    <textarea name="detalhes" id="detalhes" rows="3" placeholder="Informe os detalhes da tarefa" class="form-control"
                         formControlName="detalhes"></textarea>
                 </div>
             </div>
