@@ -21,13 +21,23 @@
             </div>
             <div class="form-group row mb-2">
                 <div class="offset-md-2 col-md-6">
-                    <button type="submit" class="btn btn-primary mr-2">
+                    <button type="submit" class="btn btn-primary mr-2"
+                    [title]="tarefaForm.valid ? 'Salvar' : 'Desabilitado até que os dados estejam validos'"
+                    [disabled]="!tarefaForm.valid">
                         Salvar
                     </button>
-                    <button type="button" class="btn btn-secondary mr-2">
+                    <button type="button" class="btn btn-outline-seconday mr-2"
+                    title="Cancelar" 
+                    [routerLink]="['/tarefas']"
+                    >
                         Cancelar
                     </button>
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-outline-danger"
+                    *ngIf="pageTitle != 'Adicionar Tarefa'"
+                    title="Excluir esta tarefa"
+                    (click)="excluirTarefa()"
+                    
+                    >
                         Excluir
                     </button>
                 </div>

@@ -1,6 +1,19 @@
 <div class="card">
     <div class="card-header">
-        Minhas Tarefas
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <strong>Minhas Tarefas</strong>
+            </div>
+
+            <div>
+                <button class="btn btn-primary"
+                [routerLink]="['/tarefas/cadastrar']">
+                <i class="fa fa-plus"></i>
+                    Nova Tarefa
+                </button>
+            </div>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table mb-0">
@@ -16,9 +29,7 @@
                         {{ tarefa.nome}}
                     </td>
                     <td>
-                        <button class="btn btn-primary btn-sm"
-                        [routerLink] = "['/tarefas', tarefa.id, 'editar']"
-                        >
+                        <button class="btn btn-primary btn-sm" [routerLink]="['/tarefas', tarefa.id, 'editar']">
                             <i class="fa fa-edit">Editar</i>
                         </button>
                     </td>

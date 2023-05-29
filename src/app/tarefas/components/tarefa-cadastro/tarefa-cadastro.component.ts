@@ -71,7 +71,7 @@ export class TarefaCadastroComponent implements OnInit, OnDestroy {
 
   }
 
-  excuirTarefa(tarefa: Tarefa): void {
+  excluirTarefa(): void {
     if (this.tarefa.id == '') {
       this.onSaveComplete();
     }
